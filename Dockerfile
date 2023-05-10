@@ -3,6 +3,7 @@ FROM node:16-alpine AS development
 WORKDIR /usr/src/app
 
 COPY package.json .
+COPY package-lock.json .
 
 RUN apk add --no-cache python3 g++ make
 
@@ -22,6 +23,7 @@ ENV NODE_ENV=${NODE_ENV}
 WORKDIR /usr/src/app
 
 COPY package.json .
+COPY package-lock.json .
 
 RUN yarn install --only=production
 
