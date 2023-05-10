@@ -14,7 +14,7 @@ jobs:
           uses: RafikFarhad/push-to-gcr-github-action@v5-beta # <- use this on your workflow
           with:
             gcloud_service_key: "${{ secrets.JSON_GCLOUD_SERVICE_ACCOUNT_JSON }}"
-            registry: gcr.io
+            registry: europe-central2-docker.pkg.dev
             project_id: box-fitness-challenge
             image_name: box-fc
             image_tag: latest
