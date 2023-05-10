@@ -2,7 +2,7 @@ FROM node:16-alpine AS development
 
 WORKDIR /usr/src/app
 
-COPY package*.json .
+COPY package.json .
 
 RUN apk add --no-cache python3 g++ make
 
