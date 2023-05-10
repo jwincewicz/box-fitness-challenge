@@ -15,7 +15,7 @@ jobs:
           with:
             gcloud_service_key: "${{ secrets.JSON_GCLOUD_SERVICE_ACCOUNT_JSON }}"
             registry: gcr.io
-            project_id: pro-chesta
+            project_id: box-fitness-challenge
             image_name: box-fc
             image_tag: latest
 #             dockerfile: ./test/Dockerfile.test
