@@ -5,42 +5,42 @@ on:
     branches: 'main'
 
 jobs:
-  build-and-push-to-gcr-without-gcloud-auth-action:
-      name: Build & push - without gcloud auth action
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v3
-        - name: Building and pushing the image
-          uses: RafikFarhad/push-to-gcr-github-action@v5-beta # <- use this on your workflow
-          with:
-            gcloud_service_key: "${{ secrets.JSON_GCLOUD_SERVICE_ACCOUNT_JSON }}"
-            registry: gcr.io
-            project_id: box-fitness-challenge
-            image_name: box-fc
-            image_tag: latest
-#             dockerfile: ./test/Dockerfile.test
-#             target: build
+#   build-and-push-to-gcr-without-gcloud-auth-action:
+#       name: Build & push - without gcloud auth action
+#       runs-on: ubuntu-latest
+#       steps:
+#         - uses: actions/checkout@v3
+#         - name: Building and pushing the image
+#           uses: RafikFarhad/push-to-gcr-github-action@v5-beta # <- use this on your workflow
+#           with:
+#             gcloud_service_key: "${{ secrets.JSON_GCLOUD_SERVICE_ACCOUNT_JSON }}"
+#             registry: gcr.io
+#             project_id: box-fitness-challenge
+#             image_name: box-fc
+#             image_tag: latest
+# #             dockerfile: ./test/Dockerfile.test
+# #             target: build
 
-#   build-and-push:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Set up QEMU
-#         uses: docker/setup-qemu-action@v2
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
 
-#       - name: Set up Docker Buildx
-#         uses: docker/setup-buildx-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
-#       - name: Login to DockerHub
-#         uses: docker/login-action@v2
-#         with:
-#           username: ${{ secrets.DOCKERHUB_USERNAME }}
-#           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-#       - name: Build and push
-#         uses: docker/build-push-action@v4
-#         with:
-#           push: true
-#           tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_PROJECT_NAME }}:latest
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_PROJECT_NAME }}:latest
 
 #   update-VPS-container:
 #     needs: build-and-push
