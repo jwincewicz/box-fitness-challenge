@@ -20,4 +20,5 @@ export const dbConfig: MysqlConnectionOptions = {
     database: process.env.DB_DATABASE,
     entities: entities,
     synchronize: true,
+    charset: 'utf8mb4_unicode_ci',
 };

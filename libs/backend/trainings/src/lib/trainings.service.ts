@@ -85,11 +85,12 @@ export class TrainingsService implements CreatesTraining, GetsTrainings, Updates
         }, new Map<Team, Training[]>());
 
         return [...teamsTrainings.entries()]
+            .filter(([team]) => !!team)
             .map(([team, trainings]) => ({
                 team,
                 ...this._getTrainingsScore(trainings),
             }))
-            .sort((a, b) => b.meanScore - a.meanScore);
+            .sort((a, b) => b.meanScore - a.meanScore) as TeamActivity[];
     }
 
     async updateTraining(
@@ -110,8 +111,6 @@ export class TrainingsService implements CreatesTraining, GetsTrainings, Updates
     }
 
     private _requireTrainingDateValid(trainingDate: Date): void {
-        return;
-        // todo: enable, disabled for debugging
         if (dayjs(trainingDate).isAfter(dayjs())) {
             throw new HttpException(TrainingsService.TRAINING_FROM_THE_FUTURE_ERROR_MESSAGE, 400);
         }
