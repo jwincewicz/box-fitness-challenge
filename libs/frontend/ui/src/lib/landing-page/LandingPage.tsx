@@ -5,10 +5,10 @@ import { LoginButton } from './LoginButton';
 export const LandingPage = () => {
     return (
         <Page>
-            <Flex alignItems={'center'} h={'100vh'}>
+            <Flex direction={['column', 'row']} alignItems={'center'} w={'100vw'} h={'100vh'}>
                 <Spacer />
 
-                <Flex direction={'column'} alignItems={'center'}>
+                <Flex direction={'row'} alignItems={'center'}>
                     <Spacer />
 
                     <LoginButton />

@@ -1,19 +1,14 @@
 import { Path } from '@box-fc/frontend/domain';
-import {
-    AnimatedTransition,
-    Dashboard,
-    LandingPage,
-    RequireAuthRouteUser,
-    theme,
-    UnauthorizedHandler,
-} from '@box-fc/frontend/ui';
+import { Dashboard, LandingPage, RequireAuthRouteUser, theme, UnauthorizedHandler } from '@box-fc/frontend/ui';
 import { ChakraProvider } from '@chakra-ui/react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
 import utc from 'dayjs/plugin/utc';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import { HashRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+import './styles.css';
 
 dayjs.extend(utc);
 dayjs.extend(isBetween);
@@ -25,19 +20,17 @@ export const App = () => {
         <GoogleOAuthProvider clientId="156218409015-gpeb1evq2j326ftj7t7avskqs7jubjbe.apps.googleusercontent.com">
             <ChakraProvider theme={theme}>
                 <QueryClientProvider client={queryClient}>
-                    {/*<ReactQueryDevtools initialIsOpen={false} />*/}
+                    <ReactQueryDevtools initialIsOpen={false} />
                     <Router basename="/">
                         <UnauthorizedHandler />
                         <Routes>
-                            <Route element={<AnimatedTransition />}>
-                                <Route path={'*'} element={<Navigate to={Path.LANDING_PAGE} replace />} />
+                            <Route path={Path.LANDING_PAGE} element={<LandingPage />} />
 
-                                <Route path={Path.LANDING_PAGE} element={<LandingPage />} />
-
-                                <Route element={<RequireAuthRouteUser />}>
-                                    <Route path={Path.DASHBOARD} element={<Dashboard />} />
-                                </Route>
+                            <Route element={<RequireAuthRouteUser />}>
+                                <Route path={`${Path.DASHBOARD}/*`} element={<Dashboard />} />
                             </Route>
+
+                            <Route path={'*'} element={<Navigate to={Path.LANDING_PAGE} replace />} />
                         </Routes>
                     </Router>
                 </QueryClientProvider>
