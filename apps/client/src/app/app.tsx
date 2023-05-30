@@ -6,7 +6,6 @@ import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
 import utc from 'dayjs/plugin/utc';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
 import { HashRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import './styles.css';
 
@@ -20,7 +19,7 @@ export const App = () => {
         <GoogleOAuthProvider clientId="156218409015-gpeb1evq2j326ftj7t7avskqs7jubjbe.apps.googleusercontent.com">
             <ChakraProvider theme={theme}>
                 <QueryClientProvider client={queryClient}>
-                    <ReactQueryDevtools initialIsOpen={false} />
+                    {/*<ReactQueryDevtools initialIsOpen={false} />*/}
                     <Router basename="/">
                         <UnauthorizedHandler />
                         <Routes>
