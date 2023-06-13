@@ -1,17 +1,18 @@
 import { TeamActivity, UserActivity } from '@box-fc/shared/types';
 import axios from 'axios';
+import { Dayjs } from 'dayjs';
 import { useQuery } from 'react-query';
 import { ACTIVITIES_QUERY_KEY } from '../query-keys/activities.query-key';
 
 type Props = {
-    startDate: Date;
-    endDate: Date;
+    startDate: Dayjs;
+    endDate: Dayjs;
 };
 
 export const useActivitiesQuery = ({ startDate, endDate }: Props) => {
     // todo: move this to a shared file
     const TRAININGS_ENDPOINT = 'activities';
-    const DEFAULT_QUERY_OPTIONS = { enabled: true, initialData: [] };
+    const DEFAULT_QUERY_OPTIONS = { enabled: true };
 
     const getAccumulatedTeamsActivities = async (): Promise<TeamActivity[]> => {
         const response = await axios.post(`${TRAININGS_ENDPOINT}/teams`, { startDate, endDate });
@@ -38,8 +39,8 @@ export const useActivitiesQuery = ({ startDate, endDate }: Props) => {
 
     return {
         teamsActivities: teamsActivitiesQuery.data as TeamActivity[],
-        teamsActivitiesStatus: teamsActivitiesQuery.status,
+        teamsActivitiesAreLoading: teamsActivitiesQuery.isLoading,
         usersActivities: usersActivitiesQuery.data as UserActivity[],
-        usersActivitiesStatus: usersActivitiesQuery.status,
+        usersActivitiesAreLoading: usersActivitiesQuery.isLoading,
     };
 };
