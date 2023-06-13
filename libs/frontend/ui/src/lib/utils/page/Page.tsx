@@ -6,7 +6,15 @@ type Props = {
 
 export const Page = ({ children }: Props) => {
     return (
-        <Flex p={[2, 4]} h={['auto', '100vh']} direction={'column'} overflow={'hidden'} backgroundColor={'blue.600'}>
+        <Flex
+            p={[1, 4]}
+            h={'100vh'}
+            w={'100vw'}
+            direction={['column', 'row']}
+            overflow={'hidden'}
+            backgroundColor={'gray.200'}
+            position={['relative', 'static']}
+        >
             {children}
         </Flex>
     );
